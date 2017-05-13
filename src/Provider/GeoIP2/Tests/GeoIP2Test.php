@@ -10,12 +10,12 @@
 
 namespace Geocoder\Provider\GeoIP2\Tests;
 
-use Geocoder\Adapter\GeoIP2Adapter;
 use Geocoder\Exception\ZeroResults;
 use Geocoder\Location;
 use Geocoder\Model\Query\GeocodeQuery;
 use Geocoder\Model\Query\ReverseQuery;
 use Geocoder\Provider\GeoIP2\GeoIP2;
+use Geocoder\Provider\GeoIP2\GeoIP2Adapter;
 use Geocoder\Tests\TestCase;
 use GeoIp2\Database\Reader;
 
