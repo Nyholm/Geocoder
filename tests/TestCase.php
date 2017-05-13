@@ -14,7 +14,7 @@ use Geocoder\Model\AddressFactory;
 use GuzzleHttp\Psr7\Response;
 use Http\Client\HttpClient;
 use Http\Mock\Client as MockClient;
-use Http\Adapter\Guzzle6\Client as HttplugClient;
+use Http\Client\Curl\Client as HttplugClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

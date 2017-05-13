@@ -28,7 +28,7 @@ use Geocoder\Provider\OpenCage\OpenCage;
 use Geocoder\Provider\Provider;
 use Geocoder\Tests\CachedResponseClient;
 use Http\Client\HttpClient;
-use Http\Adapter\Guzzle6\Client as HttplugClient;
+use Http\Client\Curl\Client as HttplugClient;
 
 /**
  * Test all adapters and make sure they provide the similar result.
