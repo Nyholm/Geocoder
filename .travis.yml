@@ -2,10 +2,9 @@ language: php
 sudo: false
 
 addons:
-  apt:
-    packages:
-      - parallel
-      - libgeoip-dev
+    apt_packages:
+        - parallel
+        - libgeoip-dev
 
 env:
     global:
