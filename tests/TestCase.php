@@ -14,7 +14,7 @@ use Geocoder\Model\AddressFactory;
 use GuzzleHttp\Psr7\Response;
 use Http\Client\HttpClient;
 use Http\Mock\Client as MockClient;
-use Http\Client\Curl\Client as HttplugClient;
+use Http\Adapter\Guzzle6\Client as HttplugClient;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -34,7 +34,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             $expects = $this->once();
         }
 
-        $stream = $this->getMock('Psr\Http\Message\StreamInterface');
+        $stream = $this->getMockBuilder('Psr\Http\Message\StreamInterface')->getMock();
         $stream
             ->expects($expects)
             ->method('__toString')
