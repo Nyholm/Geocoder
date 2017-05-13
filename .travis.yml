@@ -29,7 +29,7 @@ before_install:
       stty cols 120
       PHP=$TRAVIS_PHP_VERSION
       [ -d ~/.composer ] || mkdir ~/.composer
-      export PHPUNIT="./vendor/bin/phpunit"
+      export PHPUNIT=$(readlink -f ./phpunit)
       export PHPUNIT_X="$PHPUNIT --exclude-group benchmark"
       echo "PHPUNIT:"
       echo "$PHPUNIT"
@@ -66,6 +66,7 @@ before_install:
       echo memory_limit = -1 >> $INI
 
 install:
+  - if [[ ! $skip ]]; then $COMPOSER_UP; fi
   - |
     run_tests () {
         set -e
