@@ -27,13 +27,14 @@ before_install:
     - |
       # tfold is a helper to create folded reports
       tfold () {
-          echo "START"
-          echo "$*"
+
           title=$1
           fold=$(echo $title | sed -r 's/[^-_A-Za-z\d]+/./g')
-          echo $fold
           shift
           echo -e "travis_fold:start:$fold\\n\\e[1;34m$title\\e[0m"
+          echo "START"
+          echo "$*"
+          echo "END"
           bash -xc "$*" 2>&1 &&
               echo -e "\\e[32mOK\\e[0m $title\\n\\ntravis_fold:end:$fold" ||
               ( echo -e "\\e[41mKO\\e[0m $title\\n" && exit 1 )
@@ -73,6 +74,8 @@ install:
         elif [[ $PHP = hhvm* ]]; then
             $PHPUNIT --exclude-group benchmark,intl-data
         else
+            echo "$PHPUNIT_X"
+            echo "Start all testst"
             echo "$COMPONENTS" | parallel --gnu "tfold {} $PHPUNIT_X {}"
             tfold tty-group $PHPUNIT --group tty
         fi
