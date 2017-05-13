@@ -30,20 +30,16 @@ before_install:
       PHP=$TRAVIS_PHP_VERSION
       [ -d ~/.composer ] || mkdir ~/.composer
       cp .composer/* ~/.composer/
-      export PHPUNIT=$(readlink -f ./phpunit)
+      export PHPUNIT=$(readlink -f ./vendor/bin/phpunit)
       export PHPUNIT_X="$PHPUNIT --exclude-group tty,benchmark,intl-data"
       export COMPOSER_UP='composer update --no-progress --no-suggest --ansi'
 
       # tfold is a helper to create folded reports
       tfold () {
-
           title=$1
           fold=$(echo $title | sed -r 's/[^-_A-Za-z\d]+/./g')
           shift
           echo -e "travis_fold:start:$fold\\n\\e[1;34m$title\\e[0m"
-          echo "START"
-          echo "$*"
-          echo "END"
           bash -xc "$*" 2>&1 &&
               echo -e "\\e[32mOK\\e[0m $title\\n\\ntravis_fold:end:$fold" ||
               ( echo -e "\\e[41mKO\\e[0m $title\\n" && exit 1 )
@@ -83,8 +79,6 @@ install:
         elif [[ $PHP = hhvm* ]]; then
             $PHPUNIT --exclude-group benchmark,intl-data
         else
-            echo "$PHPUNIT_X"
-            echo "Start all testst"
             echo "$COMPONENTS" | parallel --gnu "tfold {} $PHPUNIT_X {}"
             tfold tty-group $PHPUNIT --group tty
         fi
