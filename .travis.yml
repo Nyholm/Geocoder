@@ -28,8 +28,10 @@ before_install:
       # tfold is a helper to create folded reports
       tfold () {
           echo "START"
+          echo "$*"
           title=$1
           fold=$(echo $title | sed -r 's/[^-_A-Za-z\d]+/./g')
+          echo $fold
           shift
           echo -e "travis_fold:start:$fold\\n\\e[1;34m$title\\e[0m"
           bash -xc "$*" 2>&1 &&
