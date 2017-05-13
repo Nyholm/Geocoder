@@ -25,6 +25,15 @@ before_install:
     - if [ "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "7.0" ]; then pecl install geoip; fi
     - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then composer require "geoip/geoip"; fi
     - |
+      # General configuration
+      stty cols 120
+      PHP=$TRAVIS_PHP_VERSION
+      [ -d ~/.composer ] || mkdir ~/.composer
+      cp .composer/* ~/.composer/
+      export PHPUNIT=$(readlink -f ./phpunit)
+      export PHPUNIT_X="$PHPUNIT --exclude-group tty,benchmark,intl-data"
+      export COMPOSER_UP='composer update --no-progress --no-suggest --ansi'
+
       # tfold is a helper to create folded reports
       tfold () {
 
