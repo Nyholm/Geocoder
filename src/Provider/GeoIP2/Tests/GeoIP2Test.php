@@ -223,11 +223,11 @@ class GeoIP2Test extends TestCase
     /**
      * @param mixed $returnValue
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject | GeoIP2DatabaseAdapter
+     * @return \PHPUnit_Framework_MockObject_MockObject|GeoIP2Adapter
      */
-    public function getGeoIP2AdapterMock($returnValue = '')
+    private function getGeoIP2AdapterMock($returnValue = '')
     {
-        $mock = $this->getMockBuilder('Geocoder\Adapter\GeoIP2Adapter')
+        $mock = $this->getMockBuilder(GeoIP2Adapter::class)
             ->disableOriginalConstructor()
             ->setMethods(['getContent'])
             ->getMock();
