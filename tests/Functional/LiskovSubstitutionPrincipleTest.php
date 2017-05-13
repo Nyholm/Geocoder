@@ -28,7 +28,7 @@ use Geocoder\Provider\OpenCage\OpenCage;
 use Geocoder\Provider\Provider;
 use Geocoder\Tests\CachedResponseClient;
 use Http\Client\HttpClient;
-use Http\Adapter\Guzzle6\Client as GuzzleClient;
+use Http\Client\Curl\Client as HttplugClient;
 
 /**
  * Test all adapters and make sure they provide the similar result.
@@ -169,7 +169,7 @@ class LiskovSubstitutionPrincipleTest extends \PHPUnit_Framework_TestCase
     protected function getAdapter($apiKey = null)
     {
         return new CachedResponseClient(
-            new GuzzleClient(),
+            new HttplugClient(),
             isset($_SERVER['USE_CACHED_RESPONSES']) && true === $_SERVER['USE_CACHED_RESPONSES'],
             $apiKey
         );
