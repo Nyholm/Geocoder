@@ -33,7 +33,7 @@ before_install:
       PHP=$TRAVIS_PHP_VERSION
       [ -d ~/.composer ] || mkdir ~/.composer
       export PHPUNIT=$(readlink -f ./phpunit)
-      export PHPUNIT_X="$PHPUNIT --exclude-group benchmark"
+      export PHPUNIT_X="cp $PHPUNIT `pwd`/phpunit && ./phpunit --exclude-group benchmark"
       export COMPOSER_UP='composer update --no-progress --no-suggest --ansi --prefer-dist'
 
       # If "geoip-1.1.1" exits in a provider's .travis.yml, then install the dependency.
